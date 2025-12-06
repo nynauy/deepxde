@@ -52,6 +52,9 @@ class PointSet:
             A callable function. The input of this function should be a NumPy array of
                 shape (?, `dx`).
         """
+        values = np.asarray(values)
+        if len(values) != len(self.points):
+            raise ValueError("the length of values should be the same as points")
 
         def func(x):
             distance, idx = self._kdtree.query(x, workers=-1)
